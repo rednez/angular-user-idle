@@ -1,17 +1,20 @@
 {
   "name": "angular-user-idle",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "User's idle service for Angular 4",
   "main": "user-idle.umd.js",
   "types": "user-idle.d.ts",
   "scripts": {
     "compile": "ngc",
-    "copy-packagejson": "node tools/copy-package.js",
-    "clean-dist": "node tools/clean-dist.js",
-    "clean-src": "node tools/clean-src.js",
+    "copy:packagejson": "node tools/copy-package.js",
+    "copy:readme": "node tools/copy-readme.js",
+    "copy": "npm run copy:packagejson && npm run copy:readme",
+    "clean:dist": "node tools/clean-dist.js",
+    "clean:src": "node tools/clean-src.js",
+    "clean": "npm run clean:dist && npm run clean:src",
     "prebuild": "rimraf dist",
     "build": "ngc && rollup -c",
-    "postbuild": "npm run copy-packagejson && npm run clean-dist && npm run clean-src",
+    "postbuild": "npm run copy && npm run clean",
     "publish": "cd ./dist && npm publish"
   },
   "repository": {

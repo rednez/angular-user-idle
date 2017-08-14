@@ -36,9 +36,9 @@ export class UserIdleService {
    * @param {number} timeout
    * @param {number} ping
    */
-  startWatching(idle: number = 5, timeout: number = 10, ping: number = 2) {
+  startWatching(idle: number = 600, timeout: number = 300, ping: number = 120) {
     /**
-     * If any of user events is not active for this.idle-seconds when start timer.
+     * If any of user events is not active for idle-seconds when start timer.
      * If this.interrupts is sets to true the timer will be stopped if user
      * does any event (mousemove, resize or keydown).
      * @type {Subscription}
@@ -119,7 +119,7 @@ export class UserIdleService {
   /**
    * Setup ping.
    *
-   * Pings every this.ping-seconds only if is not timeout.
+   * Pings every ping-seconds only if is not timeout.
    * @param {number} ping
    */
   private setupPing(ping: number) {
