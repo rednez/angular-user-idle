@@ -1,0 +1,43 @@
+{
+  "name": "angular-user-idle",
+  "version": "1.0.0",
+  "description": "User's idle service for Angular 4",
+  "main": "user-idle.umd.js",
+  "types": "user-idle.d.ts",
+  "scripts": {
+    "compile": "ngc",
+    "copy-packagejson": "node tools/copy-package.js",
+    "clean-dist": "node tools/clean-dist.js",
+    "clean-src": "node tools/clean-src.js",
+    "prebuild": "rimraf dist",
+    "build": "ngc && rollup -c",
+    "postbuild": "npm run copy-packagejson && npm run clean-dist && npm run clean-src",
+    "publish": "cd ./dist && npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rednez/angular-user-idle.git"
+  },
+  "keywords": [
+    "idle",
+    "angular4"
+  ],
+  "author": "Vasyl Efimenko <rednez@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@angular/core": "^4.2.2",
+    "rxjs": "^5.1.1"
+  },
+  "devDependencies": {
+    "@angular/compiler": "^4.2.2",
+    "@angular/compiler-cli": "^4.2.2",
+    "del": "^3.0.0",
+    "rimraf": "^2.6.1",
+    "rollup": "^0.47.4",
+    "rollup-plugin-commonjs": "^8.1.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-typescript": "^0.8.1",
+    "rollup-plugin-typescript2": "^0.5.0",
+    "typescript": "^2.3.4"
+  }
+}
