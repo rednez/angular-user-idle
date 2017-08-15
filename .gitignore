@@ -1,2 +1,27 @@
-/node_modules
-/dist
+# Logs
+logs
+*.log
+
+# Dependency directory
+# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
+node_modules
+
+# Debug log from npm
+npm-debug.log
+
+*.sublime-*
+.idea
+.sass-cache
+
+bower_components/
+
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+typings
+public
+coverage
+dll
+docs
+dist
