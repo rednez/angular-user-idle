@@ -1,5 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Optional } from '@angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
+
+import { UserIdleServiceConfig } from './user-idle.config';
 
 /**
  * User's idle service.
@@ -12,6 +14,20 @@ export class UserIdleService {
   private idle$: Observable<any>;
   private timer$: Observable<any>;
   /**
+   * Idle value in seconds.
+   * Default equals to 10 minutes.
+   */
+  private idle: number = 600;
+  /**
+   * Timeout value in seconds.
+   * Default equals to 5 minutes.
+   */
+  private timeout: number = 300;
+  /**
+   * Ping value in seconds.
+   */
+  private ping: number = 120;
+  /**
    * Interrupt timer by user's events.
    */
   private interrupting: boolean;
@@ -22,7 +38,13 @@ export class UserIdleService {
 
   private idleSubscription: Subscription;
 
-  constructor() {
+  constructor(@Optional() config: UserIdleServiceConfig) {
+    if (config) {
+      this.idle = config.idle;
+      this.timeout = config.timeout;
+      this.ping = config.ping;
+    }
+
     this.idle$ = Observable.merge(
       Observable.fromEvent(window, 'mousemove'),
       Observable.fromEvent(window, 'resize'),
@@ -31,12 +53,8 @@ export class UserIdleService {
 
   /**
    * Start watching for user idle and setup timer and ping.
-   *
-   * @param {number} idle
-   * @param {number} timeout
-   * @param {number} ping
    */
-  startWatching(idle: number = 600, timeout: number = 300, ping: number = 120) {
+  startWatching() {
     /**
      * If any of user events is not active for idle-seconds when start timer.
      * If this.interrupts is sets to true the timer will be stopped if user
@@ -49,13 +67,13 @@ export class UserIdleService {
           this.timerStart$.next(false);
         }
       })
-      .bufferTime(idle * 1000)
+      .bufferTime(this.idle * 1000)
       .filter(arr => !arr.length)
       .map(() => this.timerStart$.next(true))
       .subscribe();
 
-    this.setupTimer(timeout);
-    this.setupPing(ping);
+    this.setupTimer(this.timeout);
+    this.setupPing(this.ping);
   }
 
   stopWatching() {
@@ -95,6 +113,14 @@ export class UserIdleService {
         this.isTimeout = true;
         return true;
       });
+  }
+
+  getConfigValue(): UserIdleServiceConfig {
+    return {
+      idle: this.idle,
+      timeout: this.timeout,
+      ping: this.ping
+    };
   }
 
   /**

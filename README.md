@@ -20,7 +20,11 @@ import { AppComponent } from './app.component';
 @NgModule({
   imports: [
     BrowserModule,
-    UserIdleModule
+    
+    // Optionally you can set time for `idle`, `timeout` and `ping` in seconds.
+    // Default values: `idle` is 600 (10 minutes), `timeout` is 300 (5 minutes) 
+    // and `ping` is 120 (2 minutes).
+    UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 120})
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent]
@@ -77,13 +81,9 @@ export class LoginComponent implements OnInit {
 }
 ```
 ### API
-`startWatching(idle?: number, timeout?: number, ping?: number): void;`
+`startWatching(): void;`
 
 Start user idle service and configure it.
-
-Optionally you can set time for `idle`, `timeout` and `ping` in seconds.
-Default values: `idle` is 600 (10 minutes), `timeout` is 300 (5 minutes) 
-and `ping` is 120 (2 minutes).
 
 `onTimerStart(): Observable<number>`
 
