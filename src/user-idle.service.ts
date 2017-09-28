@@ -9,6 +9,12 @@ import { UserIdleServiceConfig } from './user-idle.config';
 @Injectable()
 export class UserIdleService {
   ping$: Observable<any>;
+
+  /**
+   * Events that can interrupts user's inactivity timer.
+   */
+  private readonly activityEvents$: Observable<any>;
+
   private timerStart$ = new Subject<boolean>();
   private timeout$ = new Subject<boolean>();
   private idle$: Observable<any>;
@@ -28,13 +34,13 @@ export class UserIdleService {
    */
   private ping: number = 120;
   /**
-   * Interrupt timer by user's events.
-   */
-  private interrupting: boolean;
-  /**
    * Timeout status.
    */
   private isTimeout: boolean;
+  /**
+   * Timer of user's inactivity is in progress.
+   */
+  private isInactivityTimer: boolean;
 
   private idleSubscription: Subscription;
 
@@ -45,10 +51,12 @@ export class UserIdleService {
       this.ping = config.ping;
     }
 
-    this.idle$ = Observable.merge(
+    this.activityEvents$ = Observable.merge(
       Observable.fromEvent(window, 'mousemove'),
       Observable.fromEvent(window, 'resize'),
       Observable.fromEvent(document, 'keydown'));
+
+    this.idle$ = Observable.from(this.activityEvents$);
   }
 
   /**
@@ -57,19 +65,19 @@ export class UserIdleService {
   startWatching() {
     /**
      * If any of user events is not active for idle-seconds when start timer.
-     * If this.interrupts is sets to true the timer will be stopped if user
-     * does any event (mousemove, resize or keydown).
-     * @type {Subscription}
      */
     this.idleSubscription = this.idle$
-      .map(() => {
-        if (this.interrupting) {
-          this.timerStart$.next(false);
-        }
+      .bufferTime(5000)  // Starting point of detecting of user's inactivity
+      .filter(arr => !arr.length && !this.isInactivityTimer)
+      .switchMap(() => {
+        this.isInactivityTimer = true;
+        return Observable.interval(1000)
+          .takeUntil(Observable.merge(
+            this.activityEvents$,
+            Observable.timer(this.idle * 1000)
+              .do(() => this.timerStart$.next(true))))
+          .finally(() => this.isInactivityTimer = false);
       })
-      .bufferTime(this.idle * 1000)
-      .filter(arr => !arr.length)
-      .map(() => this.timerStart$.next(true))
       .subscribe();
 
     this.setupTimer(this.timeout);

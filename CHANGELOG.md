@@ -1,3 +1,6 @@
+## Pending
+- Fix incorrect user's inactivity timer
+
 ## 1.0.3
 - Update gitignore
 
