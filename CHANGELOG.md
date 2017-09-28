@@ -1,3 +1,6 @@
+## 1.0.4
+- Fix incorrect user's inactivity timer
+
 ## 1.0.3
 - Update gitignore
 
