@@ -4,6 +4,12 @@ Service for Angular 4 to detect and control of user's idle.
 
 [![npm version](https://badge.fury.io/js/angular-user-idle.svg)](https://badge.fury.io/js/angular-user-idle)
 
+### Important
+This library was written for needs of my corporate project and this library compiles and works (Angular 5 + Webpack 3.8) very well and as I expected.
+Unfortunately, I don't have necessary time to maintance my library as fast as you can expected.
+I have a plan to review my code try to fix bugs that was reported by other users but I don't know when I do it.
+Thank for your understating.
+
 ### Installation
 
 `npm install angular-user-idle`
