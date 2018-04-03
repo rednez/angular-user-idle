@@ -1,7 +1,7 @@
 {
   "name": "angular-user-idle",
-  "version": "1.0.4",
-  "description": "User's idle service for Angular 4",
+  "version": "1.1.0",
+  "description": "User's idle service for Angular 5+",
   "main": "user-idle.umd.js",
   "types": "user-idle.d.ts",
   "scripts": {
