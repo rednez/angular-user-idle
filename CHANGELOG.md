@@ -1,6 +1,7 @@
 ## Pending
 - Include ts-sources in _dist_ to fix crashing on AOT (close #2, #3). 
 Thanks to [costaivo](https://github.com/costaivo).
+- Update dependency of Angular to 5.x, RxJS to 5.5.8.
 
 ## 1.0.4
 - Fix incorrect user's inactivity timer

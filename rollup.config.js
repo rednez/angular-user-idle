@@ -5,14 +5,15 @@ const NAME = 'user-idle';
 const DIST = 'dist/';
 
 export default {
-  entry: DIST + NAME + '.js',
-  dest: DIST + NAME + '.umd.js',
-  format: 'umd',
-  moduleName: NAME,
-  sourceMap: false,
-  globals: {
-    '@angular/core': '_angular_core',
-    'rxjs': 'rxjs'
+  input: DIST + NAME + '.js',
+  output: {
+    format: 'umd',
+    file: DIST + NAME + '.umd.js',
+    name: NAME,
+    globals: {
+      '@angular/core': '_angular_core',
+      'rxjs': 'rxjs'
+    },
   },
   external: [
     '@angular/core',
