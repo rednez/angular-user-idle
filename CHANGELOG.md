@@ -1,3 +1,7 @@
+## Pending
+- Include ts-sources in _dist_ to fix crashing on AOT (close #2, #3). 
+Thanks to [costaivo](https://github.com/costaivo).
+
 ## 1.0.4
 - Fix incorrect user's inactivity timer
 
