@@ -1,20 +1,21 @@
 {
   "name": "angular-user-idle",
-  "version": "1.0.4",
-  "description": "User's idle service for Angular 4",
+  "version": "1.1.0",
+  "description": "User's idle service for Angular 5+",
   "main": "user-idle.umd.js",
   "types": "user-idle.d.ts",
   "scripts": {
     "compile": "ngc",
     "copy:packagejson": "node tools/copy-package.js",
     "copy:readme": "node tools/copy-readme.js",
+    "copy:srcts": "node tools/copy-src-ts.js",
     "copy": "npm run copy:packagejson && npm run copy:readme",
     "clean:dist": "node tools/clean-dist.js",
     "clean:src": "node tools/clean-src.js",
     "clean": "npm run clean:dist && npm run clean:src",
     "prebuild": "rimraf dist",
     "build": "ngc && rollup -c",
-    "postbuild": "npm run copy && npm run clean",
+    "postbuild": "npm run copy && npm run clean && npm run copy:srcts",
     "publish": "cd ./dist && npm publish"
   },
   "repository": {
@@ -28,19 +29,20 @@
   "author": "Vasyl Efimenko <rednez@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@angular/core": "^4.2.2",
-    "rxjs": "^5.1.1"
+    "@angular/core": "^5.0.0",
+    "rxjs": "^5.5.8"
   },
   "devDependencies": {
-    "@angular/compiler": "^4.2.2",
-    "@angular/compiler-cli": "^4.2.2",
+    "@angular/compiler": "^5.0.0",
+    "@angular/compiler-cli": "^5.0.0",
+    "copy": "^0.3.1",
     "del": "^3.0.0",
     "rimraf": "^2.6.1",
-    "rollup": "^0.47.4",
-    "rollup-plugin-commonjs": "^8.1.0",
-    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup": "^0.57.1",
+    "rollup-plugin-commonjs": "^9.1.0",
+    "rollup-plugin-node-resolve": "^3.3.0",
     "rollup-plugin-typescript": "^0.8.1",
-    "rollup-plugin-typescript2": "^0.5.0",
-    "typescript": "^2.3.4"
+    "rollup-plugin-typescript2": "^0.12.0",
+    "typescript": "~2.6.2"
   }
 }
