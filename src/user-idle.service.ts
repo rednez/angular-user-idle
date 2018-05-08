@@ -1,5 +1,15 @@
 import { Injectable, Optional } from '@angular/core';
-import { Observable, Subject, Subscription } from 'rxjs';
+
+import {Observable} from 'rxjs/Observable';
+import {Subject} from 'rxjs/Subject';
+import {Subscription} from 'rxjs/Subscription';
+
+import {bufferTime, finalize, map, scan, take, takeUntil, tap} from 'rxjs/operators'
+
+import {timer} from 'rxjs/observable/timer';
+import {from} from 'rxjs/observable/from';
+import {fromEvent} from 'rxjs/observable/fromEvent';
+import {interval} from 'rxjs/observable/interval';
 
 import { UserIdleServiceConfig } from './user-idle.config';
 
@@ -46,11 +56,11 @@ export class UserIdleService {
     }
 
     this.activityEvents$ = Observable.merge(
-      Observable.fromEvent(window, 'mousemove'),
-      Observable.fromEvent(window, 'resize'),
-      Observable.fromEvent(document, 'keydown'));
+      fromEvent(window, 'mousemove'),
+      fromEvent(window, 'resize'),
+      fromEvent(document, 'keydown'));
 
-    this.idle$ = Observable.from(this.activityEvents$);
+    this.idle$ = from(this.activityEvents$);
   }
 
   /**
@@ -61,16 +71,23 @@ export class UserIdleService {
      * If any of user events is not active for idle-seconds when start timer.
      */
     this.idleSubscription = this.idle$
-      .bufferTime(5000)  // Starting point of detecting of user's inactivity
+      .pipe(
+        bufferTime(5000)  // Starting point of detecting of user's inactivity
+      )
       .filter(arr => !arr.length && !this.isInactivityTimer)
       .switchMap(() => {
         this.isInactivityTimer = true;
-        return Observable.interval(1000)
-          .takeUntil(Observable.merge(
-            this.activityEvents$,
-            Observable.timer(this.idle * 1000)
-              .do(() => this.timerStart$.next(true))))
-          .finally(() => this.isInactivityTimer = false);
+        return interval(1000)
+          .pipe(
+            takeUntil(Observable.merge(
+              this.activityEvents$,
+              Observable.timer(this.idle * 1000)
+                .pipe(
+                  tap(() => this.timerStart$.next(true))
+                )
+            ),
+            finalize(() => this.isInactivityTimer = false)
+          );
       })
       .subscribe();
 
@@ -110,10 +127,12 @@ export class UserIdleService {
   onTimeout(): Observable<boolean> {
     return this.timeout$
       .filter(timeout => !!timeout)
-      .map(() => {
-        this.isTimeout = true;
-        return true;
-      });
+      .pipe(
+        map(() => {
+          this.isTimeout = true;
+          return true;
+        })
+      );
   }
 
   getConfigValue(): UserIdleServiceConfig {
@@ -130,15 +149,17 @@ export class UserIdleService {
    * @param timeout Timeout in seconds.
    */
   private setupTimer(timeout: number) {
-    this.timer$ = Observable.interval(1000)
-      .take(timeout)
-      .map(() => 1)
-      .scan((acc, n) => acc + n)
-      .map(count => {
-        if (count === timeout) {
-          this.timeout$.next(true);
-        }
-        return count;
-      });
+        this.timer$ = interval(1000)
+      .pipe(
+        take(timeout),
+        map(() => 1),
+        scan((acc, n) => acc + n),
+        map(count => {
+          if (count === this.timeout) {
+            this.timeout$.next(true);
+          }
+          return count;
+        })
+      );
   }
 }
