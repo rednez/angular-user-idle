@@ -8,7 +8,6 @@ import { UserIdleServiceConfig } from './user-idle.config';
  */
 @Injectable()
 export class UserIdleService {
-  ping$: Observable<any>;
 
   /**
    * Events that can interrupts user's inactivity timer.
@@ -30,10 +29,6 @@ export class UserIdleService {
    */
   private timeout: number = 300;
   /**
-   * Ping value in seconds.
-   */
-  private ping: number = 120;
-  /**
    * Timeout status.
    */
   private isTimeout: boolean;
@@ -48,7 +43,6 @@ export class UserIdleService {
     if (config) {
       this.idle = config.idle;
       this.timeout = config.timeout;
-      this.ping = config.ping;
     }
 
     this.activityEvents$ = Observable.merge(
@@ -60,7 +54,7 @@ export class UserIdleService {
   }
 
   /**
-   * Start watching for user idle and setup timer and ping.
+   * Start watching for user idle and setup timer.
    */
   startWatching() {
     /**
@@ -81,7 +75,6 @@ export class UserIdleService {
       .subscribe();
 
     this.setupTimer(this.timeout);
-    this.setupPing(this.ping);
   }
 
   stopWatching() {
@@ -127,7 +120,6 @@ export class UserIdleService {
     return {
       idle: this.idle,
       timeout: this.timeout,
-      ping: this.ping
     };
   }
 
@@ -148,15 +140,5 @@ export class UserIdleService {
         }
         return count;
       });
-  }
-
-  /**
-   * Setup ping.
-   *
-   * Pings every ping-seconds only if is not timeout.
-   * @param {number} ping
-   */
-  private setupPing(ping: number) {
-    this.ping$ = Observable.interval(ping * 1000).filter(() => !this.isTimeout);
   }
 }
