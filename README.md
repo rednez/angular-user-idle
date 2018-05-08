@@ -86,6 +86,22 @@ export class LoginComponent implements OnInit {
   }
 }
 ```
+
+##### About _ping_
+Please note that ping used if you want to perform some action periodically every _n_-minutes in lifecycle of timer 
+(from start timer to timeout). 
+
+For example, if you want to make request to refresh token every 2 minutes you set ping to 120 and subscribe to ping's 
+observable like this:
+```typescript
+this.idle.ping$.subscribe(() => console.log("PING"));
+```
+The main schema will be as follow:
+
+`|–– 2m (ping)––4m (ping) ––6m (ping)...-– 10m (user idle detected, start timer for 5 min) –- 12m (ping) –– 14m (ping) –– 15m (time is out)|`
+
+If you don't use a ping just set ping to any value (not null) and just ignore it.
+
 ### API
 `startWatching(): void;`
 
