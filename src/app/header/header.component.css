@@ -1,0 +1,19 @@
+header {
+  background-color: #635ca9;
+  text-align: center;
+}
+
+.header__headline {
+  padding: 60px 0;
+  color: #ffffff;
+}
+
+h1 {
+  font-size: 46px;
+  font-weight: 300;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 300;
+}

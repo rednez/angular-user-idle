@@ -1,0 +1,10 @@
+<div class="container">
+  <app-header></app-header>
+  <app-timer (changeIdleValues)="onChangeIdleValue($event)"></app-timer>
+  <app-description
+    [idle]="idle"
+    [timeout]="timeout"
+    [ping]="ping"
+  ></app-description>
+  <app-footer></app-footer>
+</div>

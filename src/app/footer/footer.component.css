@@ -1,0 +1,27 @@
+footer {
+  background-color: #635ca9;
+  margin-top: 30px;
+  height: 120px;
+  color: white;
+  padding: 40px 40px 0 40px;
+  position: relative;
+}
+
+.footer_github-icon {
+  display: inline-block;
+  position: absolute;
+  top: 40px;
+  right: 40px;
+}
+
+.text {
+  width: 230px;
+}
+
+.copyright {
+  font-weight: 300;
+}
+
+.version {
+  font-weight: 400;
+}

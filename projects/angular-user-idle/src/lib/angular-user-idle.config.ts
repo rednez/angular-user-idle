@@ -1,4 +1,4 @@
-export class UserIdleServiceConfig {
+export class UserIdleConfig {
   /**
    * Idle value in seconds.
    */
