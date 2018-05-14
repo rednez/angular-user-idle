@@ -1,0 +1,15 @@
+.github-icon {
+  cursor: pointer;
+  display: inline-block;
+}
+
+.icon {
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+.title, .title:visited {
+  vertical-align: middle;
+  color: white;
+  text-decoration: none;
+}

@@ -1,0 +1,16 @@
+.description {
+  margin-top: 40px;
+  padding: 0 40px;
+}
+
+h1 {
+  margin-top: 20px;
+}
+
+li, p {
+  font-size: 16px;
+}
+
+li {
+  margin-bottom: 6px;
+}

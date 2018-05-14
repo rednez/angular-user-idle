@@ -1,0 +1,22 @@
+.timer {
+  max-width: 400px;
+  margin: 50px auto 0 auto;
+}
+
+.inputCtrl {
+  margin: 0 16px;
+  width: 25%;
+}
+
+.status {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.ping {
+  color: #048034;
+}
+
+.timeIsUp {
+  color: #e93d2c;
+}
