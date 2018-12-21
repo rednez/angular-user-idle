@@ -78,7 +78,9 @@ export class UserIdleService {
     this.activityEvents$ = merge(
       fromEvent(window, 'mousemove'),
       fromEvent(window, 'resize'),
-      fromEvent(document, 'keydown')
+      fromEvent(document, 'keydown'),
+      fromEvent(document, 'touchstart'),
+      fromEvent(document, 'touchend')
     );
 
     this.idle$ = from(this.activityEvents$);
