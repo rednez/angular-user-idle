@@ -189,6 +189,26 @@ export class UserIdleService {
   }
 
   /**
+   * Set custom activity events
+   *
+   * @param customEvents Example: merge(
+   *   fromEvent(window, 'mousemove'),
+   *   fromEvent(window, 'resize'),
+   *   fromEvent(document, 'keydown'),
+   *   fromEvent(document, 'touchstart'),
+   *   fromEvent(document, 'touchend')
+   * )
+   */
+  setCustomActivityEvents(customEvents: Observable<any>) {
+    if (this.idleSubscription && !this.idleSubscription.closed) {
+      console.error('Call stopWatching() before set custom activity events');
+      return;
+    }
+
+    this.activityEvents$ = customEvents;
+  }
+
+  /**
    * Setup timer.
    *
    * Counts every seconds and return n+1 and fire timeout for last count.
