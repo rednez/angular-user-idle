@@ -65,6 +65,7 @@ export class UserIdleService {
    * Timer of user's inactivity is in progress.
    */
   protected isInactivityTimer: boolean;
+  protected isIdleDetected: boolean;
 
   protected idleSubscription: Subscription;
 
@@ -95,19 +96,22 @@ export class UserIdleService {
     // If any of user events is not active for idle-seconds when start timer.
     this.idleSubscription = this.idle$
       .pipe(
-        bufferTime(5000), // Starting point of detecting of user's inactivity
-        filter(arr => !arr.length && !this.isInactivityTimer),
-        tap(() => this.isInactivityTimer = true),
+        bufferTime(500), // Starting point of detecting of user's inactivity
+        filter(arr => !arr.length && !this.isIdleDetected && !this.isInactivityTimer),
+        tap(() => this.isIdleDetected = true),
         switchMap(() => interval(1000).pipe(
           takeUntil(
             merge(
               this.activityEvents$,
               timer(this.idle * 1000).pipe(
-                tap(() => this.timerStart$.next(true))
+                tap(() => {
+                  this.isInactivityTimer = true;
+                  this.timerStart$.next(true);
+                })
               )
             )
           ),
-          finalize(() => (this.isInactivityTimer = false))
+          finalize(() => this.isIdleDetected = false)
           )
         )
       )
@@ -125,6 +129,7 @@ export class UserIdleService {
   }
 
   stopTimer() {
+    this.isInactivityTimer = false;
     this.timerStart$.next(false);
   }
 

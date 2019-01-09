@@ -1,3 +1,8 @@
+## Pending
+- Code style
+- Update Angular to 7 and packager
+- Make timer more accurate
+
 ## 2.0.0
 - Replace rollup by Angular CLI 6 bundling.
 - Migrate to Angular 6 core anf RxJS 6.
