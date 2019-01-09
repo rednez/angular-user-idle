@@ -136,6 +136,10 @@ Stop user idle service.
 
 Set config values after module was initialized.
 
+`setCustomActivityEvents(customEvents: Observable<any>): void`
+
+Set custom activity events after module was initialized.
+
 ##### Service logic:
 - User is inactive for 10 minutes
 - `onTimerStart()` is fire and return countdown for 5 minutes
