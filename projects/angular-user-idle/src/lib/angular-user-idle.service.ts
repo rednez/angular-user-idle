@@ -1,4 +1,4 @@
-import { Injectable, Optional } from '@angular/core';
+import { Injectable, Optional, NgZone } from '@angular/core';
 import {
   Observable,
   Subject,
@@ -69,7 +69,7 @@ export class UserIdleService {
 
   protected idleSubscription: Subscription;
 
-  constructor(@Optional() config: UserIdleConfig) {
+  constructor(@Optional() config: UserIdleConfig, private _ngZone: NgZone) {
     if (config) {
       this.idle = config.idle;
       this.timeout = config.timeout;
@@ -97,21 +97,26 @@ export class UserIdleService {
     this.idleSubscription = this.idle$
       .pipe(
         bufferTime(500), // Starting point of detecting of user's inactivity
-        filter(arr => !arr.length && !this.isIdleDetected && !this.isInactivityTimer),
-        tap(() => this.isIdleDetected = true),
-        switchMap(() => interval(1000).pipe(
-          takeUntil(
-            merge(
-              this.activityEvents$,
-              timer(this.idle * 1000).pipe(
-                tap(() => {
-                  this.isInactivityTimer = true;
-                  this.timerStart$.next(true);
-                })
-              )
+        filter(
+          arr => !arr.length && !this.isIdleDetected && !this.isInactivityTimer
+        ),
+        tap(() => (this.isIdleDetected = true)),
+        switchMap(() =>
+          this._ngZone.runOutsideAngular(() =>
+            interval(1000).pipe(
+              takeUntil(
+                merge(
+                  this.activityEvents$,
+                  timer(this.idle * 1000).pipe(
+                    tap(() => {
+                      this.isInactivityTimer = true;
+                      this.timerStart$.next(true);
+                    })
+                  )
+                )
+              ),
+              finalize(() => (this.isIdleDetected = false))
             )
-          ),
-          finalize(() => this.isIdleDetected = false)
           )
         )
       )
@@ -154,7 +159,7 @@ export class UserIdleService {
   onTimeout(): Observable<boolean> {
     return this.timeout$.pipe(
       filter(timeout => !!timeout),
-      tap(() => this.isTimeout = true),
+      tap(() => (this.isTimeout = true)),
       map(() => true)
     );
   }
@@ -215,16 +220,18 @@ export class UserIdleService {
    * @param timeout Timeout in seconds.
    */
   protected setupTimer(timeout: number) {
-    this.timer$ = interval(1000).pipe(
-      take(timeout),
-      map(() => 1),
-      scan((acc, n) => acc + n),
-      tap(count => {
-        if (count === timeout) {
-          this.timeout$.next(true);
-        }
-      })
-    );
+    this._ngZone.runOutsideAngular(() => {
+      this.timer$ = interval(1000).pipe(
+        take(timeout),
+        map(() => 1),
+        scan((acc, n) => acc + n),
+        tap(count => {
+          if (count === timeout) {
+            this.timeout$.next(true);
+          }
+        })
+      );
+    });
   }
 
   /**
@@ -234,8 +241,6 @@ export class UserIdleService {
    * @param ping
    */
   protected setupPing(ping: number) {
-    this.ping$ = interval(ping * 1000).pipe(
-      filter(() => !this.isTimeout)
-    );
+    this.ping$ = interval(ping * 1000).pipe(filter(() => !this.isTimeout));
   }
 }
