@@ -1,4 +1,4 @@
-## Pending
+## 2.1.0
 - Code style
 - Update Angular to 7 and packager
 - Make timer more accurate
