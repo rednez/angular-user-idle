@@ -1,3 +1,10 @@
+## 2.1.0
+- Code style
+- Update Angular to 7 and packager
+- Make timer more accurate
+- Extend API by `setCustomActivityEvents(customEvents: Observable<any>)`
+- Fix unwanted change detection
+
 ## 2.0.0
 - Replace rollup by Angular CLI 6 bundling.
 - Migrate to Angular 6 core anf RxJS 6.

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Subscription } from "rxjs";
-import { tap } from "rxjs/operators";
-import { UserIdleService } from "angular-user-idle";
+import { Subscription } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { UserIdleService } from 'angular-user-idle';
 
 @Component({
   selector: 'app-timer',
@@ -23,7 +23,8 @@ export class TimerComponent implements OnInit {
   private timeoutSubscription: Subscription;
   private pingSubscription: Subscription;
 
-  constructor(private userIdle: UserIdleService) {}
+  constructor(private userIdle: UserIdleService) {
+  }
 
   ngOnInit() {
     this.idle = this.userIdle.getConfigValue().idle;
