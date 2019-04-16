@@ -81,6 +81,7 @@ export class UserIdleService {
    * Start watching for user idle and setup timer and ping.
    */
   startWatching() {
+    
     this.activityEvents$ = merge(
       fromEvent(window, 'mousemove'),
       fromEvent(window, 'resize'),
