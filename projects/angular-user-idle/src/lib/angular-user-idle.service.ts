@@ -75,7 +75,13 @@ export class UserIdleService {
       this.timeout = config.timeout;
       this.ping = config.ping;
     }
+  }
 
+  /**
+   * Start watching for user idle and setup timer and ping.
+   */
+  startWatching() {
+    
     this.activityEvents$ = merge(
       fromEvent(window, 'mousemove'),
       fromEvent(window, 'resize'),
@@ -83,12 +89,6 @@ export class UserIdleService {
     );
 
     this.idle$ = from(this.activityEvents$);
-  }
-
-  /**
-   * Start watching for user idle and setup timer and ping.
-   */
-  startWatching() {
     if (this.idleSubscription) {
       this.idleSubscription.unsubscribe();
     }
