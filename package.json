@@ -1,10 +1,11 @@
 {
   "name": "user-idle-app",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:lib": "ng build angular-user-idle",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

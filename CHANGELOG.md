@@ -1,3 +1,9 @@
+## 2.1.2
+- Fixing angular SSR build issue
+
+## 2.1.1
+- Just update version
+
 ## 2.1.0
 - Code style
 - Update Angular to 7 and packager

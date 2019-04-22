@@ -1,6 +1,6 @@
 # angular-user-idle
 
-Service for Angular 6 to detect and control of user's idle.
+Service for Angular 6+ to detect and control of user's idle.
 
 [![npm version](https://badge.fury.io/js/angular-user-idle.svg)](https://badge.fury.io/js/angular-user-idle)
 
@@ -135,6 +135,10 @@ Stop user idle service.
 `setConfigValues({idle, timeout, ping})`
 
 Set config values after module was initialized.
+
+`setCustomActivityEvents(customEvents: Observable<any>): void`
+
+Set custom activity events after module was initialized.
 
 ##### Service logic:
 - User is inactive for 10 minutes
