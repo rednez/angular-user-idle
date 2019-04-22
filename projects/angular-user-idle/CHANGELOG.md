@@ -1,3 +1,6 @@
+## 2.1.2
+- Fixing angular SSR build issue
+
 ## 2.1.1
 - Just update version
 
