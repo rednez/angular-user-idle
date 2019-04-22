@@ -1,0 +1,22 @@
+section {
+  margin-top: 40px;
+  padding: 0 40px;
+  font-size: 16px;
+}
+
+h1 {
+  margin-top: 20px;
+}
+
+.code {
+  font-family: monospace;
+  display: inline-block;
+  background-color: #eaeaea;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.text {
+  margin-top: 8px;
+  margin-bottom: 16px;
+}

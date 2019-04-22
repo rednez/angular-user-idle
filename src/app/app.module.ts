@@ -16,6 +16,7 @@ import { HeaderComponent } from './header/header.component';
 import { DescriptionComponent } from './description/description.component';
 import { FooterComponent } from './footer/footer.component';
 import { GithubIconComponent } from './github-icon/github-icon.component';
+import { ApiInfoComponent } from './api-info/api-info.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { GithubIconComponent } from './github-icon/github-icon.component';
     HeaderComponent,
     DescriptionComponent,
     FooterComponent,
-    GithubIconComponent
+    GithubIconComponent,
+    ApiInfoComponent
   ],
   imports: [
     BrowserModule,
