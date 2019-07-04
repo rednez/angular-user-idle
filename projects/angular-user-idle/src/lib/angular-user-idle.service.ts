@@ -81,11 +81,13 @@ export class UserIdleService {
    * Start watching for user idle and setup timer and ping.
    */
   startWatching() {
-    this.activityEvents$ = merge(
-      fromEvent(window, 'mousemove'),
-      fromEvent(window, 'resize'),
-      fromEvent(document, 'keydown')
-    );
+    if (!this.activityEvents$) {
+      this.activityEvents$ = merge(
+        fromEvent(window, 'mousemove'),
+        fromEvent(window, 'resize'),
+        fromEvent(document, 'keydown'),
+      );
+    }
 
     this.idle$ = from(this.activityEvents$);
 
