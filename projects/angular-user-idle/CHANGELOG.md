@@ -1,3 +1,6 @@
+## 2.1.3
+- Update peerDependencies to support Angular 8.x
+
 ## 2.1.2
 - Fixing angular SSR build issue
 
