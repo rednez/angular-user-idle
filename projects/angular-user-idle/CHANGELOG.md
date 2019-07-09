@@ -1,3 +1,6 @@
+## 2.1.4
+- Fixing
+
 ## 2.1.3
 - Update peerDependencies to support Angular 8.x
 
