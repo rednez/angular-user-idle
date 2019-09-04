@@ -1,14 +1,14 @@
-import { Injectable, Optional, NgZone } from '@angular/core';
+import { Injectable, NgZone, Optional } from '@angular/core';
 import {
+  from,
+  fromEvent,
+  interval,
+  merge,
   Observable,
+  of,
   Subject,
   Subscription,
-  merge,
-  fromEvent,
-  from,
-  interval,
-  timer,
-  of
+  timer
 } from 'rxjs';
 import {
   bufferTime,
@@ -39,6 +39,7 @@ export class UserIdleService {
   protected activityEvents$: Observable<any>;
 
   protected timerStart$ = new Subject<boolean>();
+  protected idleDetected$ = new Subject<boolean>();
   protected timeout$ = new Subject<boolean>();
   protected idle$: Observable<any>;
   protected timer$: Observable<any>;
@@ -54,7 +55,7 @@ export class UserIdleService {
   protected timeout = 300;
   /**
    * Ping value in seconds.
-   * * Default equals to 2 minutes.
+   * Default equals to 2 minutes.
    */
   protected ping = 120;
   /**
@@ -85,7 +86,7 @@ export class UserIdleService {
       this.activityEvents$ = merge(
         fromEvent(window, 'mousemove'),
         fromEvent(window, 'resize'),
-        fromEvent(document, 'keydown'),
+        fromEvent(document, 'keydown')
       );
     }
 
@@ -102,7 +103,10 @@ export class UserIdleService {
         filter(
           arr => !arr.length && !this.isIdleDetected && !this.isInactivityTimer
         ),
-        tap(() => (this.isIdleDetected = true)),
+        tap(() => {
+          this.isIdleDetected = true;
+          this.idleDetected$.next(true);
+        }),
         switchMap(() =>
           this._ngZone.runOutsideAngular(() =>
             interval(1000).pipe(
@@ -117,7 +121,10 @@ export class UserIdleService {
                   )
                 )
               ),
-              finalize(() => (this.isIdleDetected = false))
+              finalize(() => {
+                this.isIdleDetected = false;
+                this.idleDetected$.next(false);
+              })
             )
           )
         )
@@ -153,6 +160,13 @@ export class UserIdleService {
       distinctUntilChanged(),
       switchMap(start => (start ? this.timer$ : of(null)))
     );
+  }
+
+  /**
+   * Return observable for idle status changed
+   */
+  onIdleStatusChanged(): Observable<boolean> {
+    return this.idleDetected$.asObservable();
   }
 
   /**
