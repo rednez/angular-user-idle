@@ -11,4 +11,9 @@ export class UserIdleConfig {
    * Ping value in seconds.
    */
   ping: number;
+  /**
+   * IdleSensitivity time that activity must remain below the idle detection threshold before
+   * idle buffer timer count user's activity actions, in seconds.
+   */
+  idleSensitivity: number;
 }
