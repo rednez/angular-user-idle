@@ -1,3 +1,6 @@
+## 2.2.1
+- Set root module params (UserIdleConfig) as optional.
+
 ## 2.2.0
 - Add idleSensitivity to config, prepare configurations in milliseconds.
 - Add observable to watch idle status changes.
