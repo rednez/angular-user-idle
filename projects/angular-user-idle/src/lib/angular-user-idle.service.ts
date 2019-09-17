@@ -1,14 +1,14 @@
-import { Injectable, Optional, NgZone } from '@angular/core';
+import { Injectable, NgZone, Optional } from '@angular/core';
 import {
+  from,
+  fromEvent,
+  interval,
+  merge,
   Observable,
+  of,
   Subject,
   Subscription,
-  merge,
-  fromEvent,
-  from,
-  interval,
-  timer,
-  of
+  timer
 } from 'rxjs';
 import {
   bufferTime,
@@ -39,24 +39,30 @@ export class UserIdleService {
   protected activityEvents$: Observable<any>;
 
   protected timerStart$ = new Subject<boolean>();
+  protected idleDetected$ = new Subject<boolean>();
   protected timeout$ = new Subject<boolean>();
   protected idle$: Observable<any>;
   protected timer$: Observable<any>;
   /**
-   * Idle value in seconds.
+   * Idle value in milliseconds.
    * Default equals to 10 minutes.
    */
-  protected idle = 600;
+  protected idleMillisec = 600 * 1000;
+  /**
+   * Idle buffer wait time milliseconds to collect user action
+   * Default equals to 1 Sec.
+   */
+  protected idleSensitivityMillisec = 1 * 1000;
   /**
    * Timeout value in seconds.
    * Default equals to 5 minutes.
    */
   protected timeout = 300;
   /**
-   * Ping value in seconds.
-   * * Default equals to 2 minutes.
+   * Ping value in milliseconds.
+   * Default equals to 2 minutes.
    */
-  protected ping = 120;
+  protected pingMillisec = 120 * 1000;
   /**
    * Timeout status.
    */
@@ -71,9 +77,7 @@ export class UserIdleService {
 
   constructor(@Optional() config: UserIdleConfig, private _ngZone: NgZone) {
     if (config) {
-      this.idle = config.idle;
-      this.timeout = config.timeout;
-      this.ping = config.ping;
+      this.setConfig(config);
     }
   }
 
@@ -85,7 +89,7 @@ export class UserIdleService {
       this.activityEvents$ = merge(
         fromEvent(window, 'mousemove'),
         fromEvent(window, 'resize'),
-        fromEvent(document, 'keydown'),
+        fromEvent(document, 'keydown')
       );
     }
 
@@ -98,18 +102,21 @@ export class UserIdleService {
     // If any of user events is not active for idle-seconds when start timer.
     this.idleSubscription = this.idle$
       .pipe(
-        bufferTime(500), // Starting point of detecting of user's inactivity
+        bufferTime(this.idleSensitivityMillisec), // Starting point of detecting of user's inactivity
         filter(
           arr => !arr.length && !this.isIdleDetected && !this.isInactivityTimer
         ),
-        tap(() => (this.isIdleDetected = true)),
+        tap(() => {
+          this.isIdleDetected = true;
+          this.idleDetected$.next(true);
+        }),
         switchMap(() =>
           this._ngZone.runOutsideAngular(() =>
             interval(1000).pipe(
               takeUntil(
                 merge(
                   this.activityEvents$,
-                  timer(this.idle * 1000).pipe(
+                  timer(this.idleMillisec).pipe(
                     tap(() => {
                       this.isInactivityTimer = true;
                       this.timerStart$.next(true);
@@ -117,7 +124,10 @@ export class UserIdleService {
                   )
                 )
               ),
-              finalize(() => (this.isIdleDetected = false))
+              finalize(() => {
+                this.isIdleDetected = false;
+                this.idleDetected$.next(false);
+              })
             )
           )
         )
@@ -125,7 +135,7 @@ export class UserIdleService {
       .subscribe();
 
     this.setupTimer(this.timeout);
-    this.setupPing(this.ping);
+    this.setupPing(this.pingMillisec);
   }
 
   stopWatching() {
@@ -156,6 +166,13 @@ export class UserIdleService {
   }
 
   /**
+   * Return observable for idle status changed
+   */
+  onIdleStatusChanged(): Observable<boolean> {
+    return this.idleDetected$.asObservable();
+  }
+
+  /**
    * Return observable for timeout is fired.
    */
   onTimeout(): Observable<boolean> {
@@ -168,9 +185,10 @@ export class UserIdleService {
 
   getConfigValue(): UserIdleConfig {
     return {
-      idle: this.idle,
+      idle: this.idleMillisec,
+      idleSensitivity: this.idleSensitivityMillisec,
       timeout: this.timeout,
-      ping: this.ping
+      ping: this.pingMillisec
     };
   }
 
@@ -184,11 +202,18 @@ export class UserIdleService {
       return;
     }
 
+    this.setConfig(config);
+  }
+
+  private setConfig(config: UserIdleConfig) {
     if (config.idle) {
-      this.idle = config.idle;
+      this.idleMillisec = config.idle * 1000;
+    }
+    if (config.idle) {
+      this.idleMillisec = config.idle * 1000;
     }
     if (config.ping) {
-      this.ping = config.ping;
+      this.pingMillisec = config.ping * 1000;
     }
     if (config.timeout) {
       this.timeout = config.timeout;
@@ -242,7 +267,7 @@ export class UserIdleService {
    * Pings every ping-seconds only if is not timeout.
    * @param ping
    */
-  protected setupPing(ping: number) {
-    this.ping$ = interval(ping * 1000).pipe(filter(() => !this.isTimeout));
+  protected setupPing(pingMillisec: number) {
+    this.ping$ = interval(pingMillisec).pipe(filter(() => !this.isTimeout));
   }
 }
