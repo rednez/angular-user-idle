@@ -10,7 +10,7 @@ Unfortunately, I don't have necessary time to maintenance my library as fast as 
 I have a plan to review my code to try to fix a bugs that was reported by other users but I don't know when I do it.
 Thank for your understanding.
 
-**To use this library in Angular 5.x use angular-user-idle ver. 1.1.0.**
+**To use this library in Angular 5.x use angular-user-idle ver. 1.1.0 (_depreacated and don't supported!_)**
 
 #### Demo
 [angular-user-idle.rednez.com](http://angular-user-idle.rednez.com)
