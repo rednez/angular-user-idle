@@ -1,3 +1,13 @@
+## 2.2.0
+- Add idleSensitivity to config, prepare configurations in milliseconds.
+- Add observable to watch idle status changes.
+
+## 2.1.4
+- Fixing
+
+## 2.1.3
+- Update peerDependencies to support Angular 8.x
+
 ## 2.1.2
 - Fixing angular SSR build issue
 
