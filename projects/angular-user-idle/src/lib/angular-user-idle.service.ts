@@ -52,7 +52,7 @@ export class UserIdleService {
    * Idle buffer wait time milliseconds to collect user action
    * Default equals to 1 Sec.
    */
-  protected idleSensitivityMillisec = 1 * 1000;
+  protected idleSensitivityMillisec = 1000;
   /**
    * Timeout value in seconds.
    * Default equals to 5 minutes.
@@ -265,7 +265,7 @@ export class UserIdleService {
    * Setup ping.
    *
    * Pings every ping-seconds only if is not timeout.
-   * @param ping
+   * @param pingMillisec
    */
   protected setupPing(pingMillisec: number) {
     this.ping$ = interval(pingMillisec).pipe(filter(() => !this.isTimeout));
