@@ -1,3 +1,7 @@
+## 2.2.0
+- Add idleSensitivity to config, prepare configurations in milliseconds.
+- Add observable to watch idle status changes.
+
 ## 2.1.4
 - Fixing
 
