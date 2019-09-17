@@ -209,11 +209,11 @@ export class UserIdleService {
     if (config.idle) {
       this.idleMillisec = config.idle * 1000;
     }
-    if (config.idle) {
-      this.idleMillisec = config.idle * 1000;
-    }
     if (config.ping) {
       this.pingMillisec = config.ping * 1000;
+    }
+    if (config.idleSensitivity) {
+      this.idleSensitivityMillisec = config.idleSensitivity * 1000;
     }
     if (config.timeout) {
       this.timeout = config.timeout;
