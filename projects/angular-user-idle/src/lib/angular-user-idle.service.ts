@@ -38,6 +38,11 @@ export class UserIdleService {
    */
   protected activityEvents$: Observable<any>;
 
+  /**
+   * UNIX-time in seconds when last user activity happened.
+   */
+  protected lastActivity: number;
+
   protected timerStart$ = new Subject<boolean>();
   protected idleDetected$ = new Subject<boolean>();
   protected timeout$ = new Subject<boolean>();
@@ -75,6 +80,10 @@ export class UserIdleService {
 
   protected idleSubscription: Subscription;
 
+  static nowInSeconds(): number {
+    return Math.floor(Date.now() / 1000);
+  }
+
   constructor(@Optional() config: UserIdleConfig, private _ngZone: NgZone) {
     if (config) {
       this.setConfig(config);
@@ -95,6 +104,14 @@ export class UserIdleService {
 
     this.idle$ = from(this.activityEvents$);
 
+    this.activityEvents$.pipe(
+        bufferTime(this.idleSensitivityMillisec),
+        filter(arr => arr.length && !this.isIdleDetected && !this.isInactivityTimer)
+    ).subscribe(() => {
+      this.lastActivity = UserIdleService.nowInSeconds();
+      console.debug(`${new Date()} last activity recorded`);
+    });
+
     if (this.idleSubscription) {
       this.idleSubscription.unsubscribe();
     }
@@ -103,9 +120,7 @@ export class UserIdleService {
     this.idleSubscription = this.idle$
       .pipe(
         bufferTime(this.idleSensitivityMillisec), // Starting point of detecting of user's inactivity
-        filter(
-          arr => !arr.length && !this.isIdleDetected && !this.isInactivityTimer
-        ),
+        filter(arr => !arr.length && !this.isIdleDetected && !this.isInactivityTimer),
         tap(() => {
           this.isIdleDetected = true;
           this.idleDetected$.next(true);
@@ -243,7 +258,7 @@ export class UserIdleService {
   /**
    * Setup timer.
    *
-   * Counts every seconds and return n+1 and fire timeout for last count.
+   * Counts every seconds and return n+1 and fire timeout either for last count or if last activity was too long ago.
    * @param timeout Timeout in seconds.
    */
   protected setupTimer(timeout: number) {
@@ -253,10 +268,11 @@ export class UserIdleService {
         map(() => 1),
         scan((acc, n) => acc + n),
         tap(count => {
-          if (count === timeout) {
+          if (count === timeout || this.lastActivity + this.timeout < UserIdleService.nowInSeconds()) {
             this.timeout$.next(true);
           }
-        })
+        }),
+        takeUntil(this.timeout$)
       );
     });
   }
