@@ -109,7 +109,6 @@ export class UserIdleService {
         filter(arr => arr.length && !this.isIdleDetected && !this.isInactivityTimer)
     ).subscribe(() => {
       this.lastActivity = UserIdleService.nowInSeconds();
-      console.debug(`${new Date()} last activity recorded`);
     });
 
     if (this.idleSubscription) {
