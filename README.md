@@ -13,7 +13,7 @@ Thank for your understanding.
 **To use this library in Angular 5.x use angular-user-idle ver. 1.1.0 (_depreacated and don't supported!_)**
 
 #### Demo
-[angular-user-idle.pp.ua](http://angular-user-idle.pp.ua)
+See [Demo app](https://rednez.github.io/angular-user-idle)
 
 ### Installation
 
