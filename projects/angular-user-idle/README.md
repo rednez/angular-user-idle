@@ -2,8 +2,6 @@
 
 Service for Angular 6+ to detect and control of user's idle.
 
-[![npm version](https://badge.fury.io/js/angular-user-idle.svg)](https://badge.fury.io/js/angular-user-idle)
-
 ## Important
 This library was written for needs of my corporate project and this library compiles and works (Angular 6) very well and as I expected.
 Unfortunately, I don't have necessary time to maintenance my library as fast as you can expected.
@@ -13,7 +11,7 @@ Thank for your understanding.
 **To use this library in Angular 5.x use angular-user-idle ver. 1.1.0 (_depreacated and don't supported!_)**
 
 #### Demo
-[angular-user-idle.rednez.com](http://angular-user-idle.rednez.com)
+See [Demo app](https://rednez.github.io/angular-user-idle)
 
 ### Installation
 
