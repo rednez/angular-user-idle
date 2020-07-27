@@ -1,3 +1,9 @@
+## 2.2.3
+- Upgrade peer dependencies for Angular 10
+
+## 2.2.2
+- Included updated peerDependencies and README.md
+
 ## 2.2.1
 - Set root module params (UserIdleConfig) as optional.
 
