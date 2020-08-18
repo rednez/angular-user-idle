@@ -1,3 +1,6 @@
+## 2.2.4
+- No changes
+
 ## 2.2.3
 - Upgrade peer dependencies for Angular 10
 
