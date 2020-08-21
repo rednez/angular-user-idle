@@ -5,7 +5,7 @@ import { UserIdleConfig } from './angular-user-idle.config';
   imports: []
 })
 export class UserIdleModule {
-  static forRoot(config: UserIdleConfig): ModuleWithProviders {
+  static forRoot(config: UserIdleConfig): ModuleWithProviders<UserIdleModule> {
     return {
       ngModule: UserIdleModule,
       providers: [
