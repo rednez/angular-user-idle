@@ -185,10 +185,10 @@ export class UserIdleService {
 
   getConfigValue(): UserIdleConfig {
     return {
-      idle: this.idleMillisec,
-      idleSensitivity: this.idleSensitivityMillisec,
+      idle: this.idleMillisec / 1000,
+      idleSensitivity: this.idleSensitivityMillisec / 1000,
       timeout: this.timeout,
-      ping: this.pingMillisec
+      ping: this.pingMillisec / 1000
     };
   }
 
