@@ -1,3 +1,6 @@
+## 2.2.5
+- Fixes
+
 ## 2.2.4
 - No changes
 
