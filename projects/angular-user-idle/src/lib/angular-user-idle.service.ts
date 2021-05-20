@@ -16,9 +16,7 @@ import {
   filter,
   finalize,
   map,
-  scan,
   switchMap,
-  take,
   takeUntil,
   tap
 } from 'rxjs/operators';
@@ -248,16 +246,16 @@ export class UserIdleService {
    */
   protected setupTimer(timeout: number) {
     this._ngZone.runOutsideAngular(() => {
-      this.timer$ = interval(1000).pipe(
-        take(timeout),
-        map(() => 1),
-        scan((acc, n) => acc + n),
-        tap(count => {
-          if (count === timeout) {
-            this.timeout$.next(true);
-          }
-        })
-      );
+      this.timer$ = of(new Date()).pipe(
+        switchMap(startDate => interval(1000).pipe(
+          map(() => Math.round((new Date().valueOf() - startDate.valueOf()) / 1000)),  //   convert elapsed count to seconds
+          tap(elapsed => {
+            if (elapsed >= timeout) {
+              this.timeout$.next(true);
+            }
+          }),
+          )
+        ));
     });
   }
 
