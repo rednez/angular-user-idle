@@ -1,6 +1,6 @@
 {
   "name": "angular-user-idle",
-  "version": "2.2.5",
+  "version": "2.2.6",
   "description": "User's idle service for Angular 6+",
   "repository": {
     "type": "git",
