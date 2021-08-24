@@ -246,7 +246,8 @@ export class UserIdleService {
    */
   protected setupTimer(timeout: number) {
     this._ngZone.runOutsideAngular(() => {
-      this.timer$ = of(new Date()).pipe(
+      this.timer$ = of(() => new Date()).pipe(
+        map(fn => fn()),
         switchMap(startDate => interval(1000).pipe(
           map(() => Math.round((new Date().valueOf() - startDate.valueOf()) / 1000)),  //   convert elapsed count to seconds
           tap(elapsed => {
