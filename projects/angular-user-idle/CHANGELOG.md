@@ -1,3 +1,6 @@
+## 2.2.7
+- Fixed #111 (regression issue)
+
 ## 2.2.6
 - Fixes (#111)
 
