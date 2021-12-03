@@ -18,21 +18,21 @@
   "author": "Vasyl Efimenko <rednez@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@angular/animations": "^7.2.3",
-    "@angular/cdk": "^7.3.0",
-    "@angular/common": "^7.2.3",
-    "@angular/compiler": "^7.2.3",
-    "@angular/core": "^7.2.3",
-    "@angular/forms": "^7.2.3",
+    "@angular/animations": "^9.1.13",
+    "@angular/cdk": "^8.2.3",
+    "@angular/common": "^9.1.13",
+    "@angular/compiler": "^9.1.13",
+    "@angular/core": "^9.1.13",
+    "@angular/forms": "^9.1.13",
     "@angular/http": "^7.2.3",
     "@angular/material": "^7.3.0",
-    "@angular/platform-browser": "^7.2.3",
-    "@angular/platform-browser-dynamic": "^7.2.3",
-    "@angular/router": "^7.2.3",
+    "@angular/platform-browser": "^9.1.13",
+    "@angular/platform-browser-dynamic": "^9.1.13",
+    "@angular/router": "^9.1.13",
     "core-js": "^2.5.4",
     "node-sass": "^6.0.1",
     "rxjs": "^6.4.0",
-    "zone.js": "^0.8.29"
+    "zone.js": "^0.10.3"
   },
   "resolutions": {
     "node-sass": "^6.0.1"
@@ -41,8 +41,8 @@
     "@angular-devkit/build-angular": "^13.0.4",
     "@angular-devkit/build-ng-packagr": "^0.1002.0",
     "@angular/cli": "~7.3.0",
-    "@angular/compiler-cli": "^7.2.3",
-    "@angular/language-service": "^7.2.3",
+    "@angular/compiler-cli": "^9.1.13",
+    "@angular/language-service": "^9.1.13",
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
@@ -61,6 +61,6 @@
     "tsickle": "^0.34.0",
     "tslib": "^1.7.1",
     "tslint": "~5.12.0",
-    "typescript": "~3.2.4"
+    "typescript": "~3.8.3"
   }
 }
