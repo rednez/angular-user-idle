@@ -19,12 +19,12 @@
   "license": "MIT",
   "dependencies": {
     "@angular/animations": "^13.0.3",
-    "@angular/cdk": "^12.2.13",
+    "@angular/cdk": "^13.0.3",
     "@angular/common": "^13.0.3",
     "@angular/compiler": "^13.0.3",
-    "@angular/core": "^12.2.14",
+    "@angular/core": "^13.0.3",
     "@angular/forms": "^13.0.3",
-    "@angular/material": "^12.2.13",
+    "@angular/material": "^13.0.3",
     "@angular/platform-browser": "^13.0.3",
     "@angular/platform-browser-dynamic": "^13.0.3",
     "@angular/router": "^13.0.3",
@@ -38,9 +38,9 @@
     "node-sass": "^6.0.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~12.2.13",
+    "@angular-devkit/build-angular": "~13.0.4",
     "@angular-devkit/build-ng-packagr": "~0.1002.3",
-    "@angular/cli": "~12.2.13",
+    "@angular/cli": "~13.0.4",
     "@angular/compiler-cli": "^13.0.3",
     "@angular/language-service": "^13.0.3",
     "@types/jasmine": "~2.8.6",
@@ -54,11 +54,11 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
-    "ng-packagr": "^12.2.5",
+    "ng-packagr": "^13.0.8",
     "prettier": "^1.16.3",
     "protractor": "~7.0.0",
     "ts-node": "~5.0.1",
     "tslint": "~6.1.0",
-    "typescript": "~4.3.5"
+    "typescript": "~4.4.4"
   }
 }
