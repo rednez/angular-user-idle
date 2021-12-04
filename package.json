@@ -1,6 +1,6 @@
 {
   "name": "user-idle-app",
-  "version": "1.0.3",
+  "version": "12.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -38,9 +38,9 @@
     "node-sass": "^6.0.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.1002.3",
+    "@angular-devkit/build-angular": "~0.1102.15",
     "@angular-devkit/build-ng-packagr": "~0.1002.3",
-    "@angular/cli": "~10.2.3",
+    "@angular/cli": "~11.2.15",
     "@angular/compiler-cli": "^11.2.14",
     "@angular/language-service": "^11.2.14",
     "@types/jasmine": "~2.8.6",
@@ -49,12 +49,12 @@
     "codelyzer": "^5.1.2",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~5.0.0",
-    "karma": "~5.0.0",
+    "karma": "~6.3.9",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
-    "ng-packagr": "^10.1.0",
+    "ng-packagr": "^11.2.4",
     "prettier": "^1.16.3",
     "protractor": "~7.0.0",
     "ts-node": "~5.0.1",

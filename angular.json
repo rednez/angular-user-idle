@@ -25,7 +25,8 @@
             ],
             "styles": [
               {
-                "input": "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+                "input": "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+                "inject": true
               },
               "src/styles.css"
             ],
@@ -48,7 +49,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -83,7 +83,8 @@
             "karmaConfig": "src/karma.conf.js",
             "styles": [
               {
-                "input": "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+                "input": "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+                "inject": true
               },
               "src/styles.css"
             ],
@@ -137,7 +138,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/angular-user-idle/tsconfig.lib.json",
             "project": "projects/angular-user-idle/ng-package.json"
