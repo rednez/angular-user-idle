@@ -18,31 +18,31 @@
   "author": "Vasyl Efimenko <rednez@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@angular/animations": "^11.2.14",
-    "@angular/cdk": "^11.2.13",
-    "@angular/common": "^11.2.14",
-    "@angular/compiler": "^11.2.14",
-    "@angular/core": "^11.2.14",
-    "@angular/forms": "^11.2.14",
-    "@angular/material": "^11.2.13",
-    "@angular/platform-browser": "^11.2.14",
-    "@angular/platform-browser-dynamic": "^11.2.14",
-    "@angular/router": "^11.2.14",
+    "@angular/animations": "^13.0.3",
+    "@angular/cdk": "^12.2.13",
+    "@angular/common": "^13.0.3",
+    "@angular/compiler": "^13.0.3",
+    "@angular/core": "^12.2.14",
+    "@angular/forms": "^13.0.3",
+    "@angular/material": "^12.2.13",
+    "@angular/platform-browser": "^13.0.3",
+    "@angular/platform-browser-dynamic": "^13.0.3",
+    "@angular/router": "^13.0.3",
     "core-js": "^2.5.4",
     "node-sass": "^6.0.1",
     "rxjs": "^6.4.0",
     "tslib": "^2.0.0",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.11.4"
   },
   "resolutions": {
     "node-sass": "^6.0.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.1102.15",
+    "@angular-devkit/build-angular": "~12.2.13",
     "@angular-devkit/build-ng-packagr": "~0.1002.3",
-    "@angular/cli": "~11.2.15",
-    "@angular/compiler-cli": "^11.2.14",
-    "@angular/language-service": "^11.2.14",
+    "@angular/cli": "~12.2.13",
+    "@angular/compiler-cli": "^13.0.3",
+    "@angular/language-service": "^13.0.3",
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
@@ -54,11 +54,11 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
-    "ng-packagr": "^11.2.4",
+    "ng-packagr": "^12.2.5",
     "prettier": "^1.16.3",
     "protractor": "~7.0.0",
     "ts-node": "~5.0.1",
     "tslint": "~6.1.0",
-    "typescript": "~4.1.6"
+    "typescript": "~4.3.5"
   }
 }
