@@ -24,20 +24,19 @@ import { ApiInfoComponent } from './api-info/api-info.component';
     DescriptionComponent,
     FooterComponent,
     GithubIconComponent,
-    ApiInfoComponent
+    ApiInfoComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    UserIdleModule.forRoot({idle: 60, timeout: 120, ping: 60}),
+    UserIdleModule.forRoot({ idle: 60, timeout: 120, ping: 60 }),
     BrowserAnimationsModule,
     MatButtonModule,
     MatCardModule,
     MatInputModule,
-    MatBadgeModule
+    MatBadgeModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}

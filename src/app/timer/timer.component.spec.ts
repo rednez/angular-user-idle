@@ -6,12 +6,13 @@ describe('TimerComponent', () => {
   let component: TimerComponent;
   let fixture: ComponentFixture<TimerComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ TimerComponent ]
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [TimerComponent],
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TimerComponent);

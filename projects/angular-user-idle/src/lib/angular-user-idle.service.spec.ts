@@ -5,11 +5,14 @@ import { UserIdleService } from './angular-user-idle.service';
 describe('UserIdleService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [UserIdleService]
+      providers: [UserIdleService],
     });
   });
 
-  it('should be created', inject([UserIdleService], (service: UserIdleService) => {
-    expect(service).toBeTruthy();
-  }));
+  it('should be created', inject(
+    [UserIdleService],
+    (service: UserIdleService) => {
+      expect(service).toBeTruthy();
+    }
+  ));
 });

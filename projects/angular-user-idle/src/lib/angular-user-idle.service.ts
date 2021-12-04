@@ -8,7 +8,7 @@ import {
   of,
   Subject,
   Subscription,
-  timer
+  timer,
 } from 'rxjs';
 import {
   bufferTime,
@@ -18,7 +18,7 @@ import {
   map,
   switchMap,
   takeUntil,
-  tap
+  tap,
 } from 'rxjs/operators';
 import { UserIdleConfig } from './angular-user-idle.config';
 
@@ -26,7 +26,7 @@ import { UserIdleConfig } from './angular-user-idle.config';
  * User's idle service.
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserIdleService {
   ping$: Observable<any>;
@@ -102,7 +102,8 @@ export class UserIdleService {
       .pipe(
         bufferTime(this.idleSensitivityMillisec), // Starting point of detecting of user's inactivity
         filter(
-          arr => !arr.length && !this.isIdleDetected && !this.isInactivityTimer
+          (arr) =>
+            !arr.length && !this.isIdleDetected && !this.isInactivityTimer
         ),
         tap(() => {
           this.isIdleDetected = true;
@@ -159,7 +160,7 @@ export class UserIdleService {
   onTimerStart(): Observable<number> {
     return this.timerStart$.pipe(
       distinctUntilChanged(),
-      switchMap(start => (start ? this.timer$ : of(null)))
+      switchMap((start) => (start ? this.timer$ : of(null)))
     );
   }
 
@@ -175,7 +176,7 @@ export class UserIdleService {
    */
   onTimeout(): Observable<boolean> {
     return this.timeout$.pipe(
-      filter(timeout => !!timeout),
+      filter((timeout) => !!timeout),
       tap(() => (this.isTimeout = true)),
       map(() => true)
     );
@@ -186,7 +187,7 @@ export class UserIdleService {
       idle: this.idleMillisec / 1000,
       idleSensitivity: this.idleSensitivityMillisec / 1000,
       timeout: this.timeout,
-      ping: this.pingMillisec / 1000
+      ping: this.pingMillisec / 1000,
     };
   }
 
@@ -247,16 +248,20 @@ export class UserIdleService {
   protected setupTimer(timeout: number) {
     this._ngZone.runOutsideAngular(() => {
       this.timer$ = of(() => new Date()).pipe(
-        map(fn => fn()),
-        switchMap(startDate => interval(1000).pipe(
-          map(() => Math.round((new Date().valueOf() - startDate.valueOf()) / 1000)),  //   convert elapsed count to seconds
-          tap(elapsed => {
-            if (elapsed >= timeout) {
-              this.timeout$.next(true);
-            }
-          }),
+        map((fn) => fn()),
+        switchMap((startDate) =>
+          interval(1000).pipe(
+            map(() =>
+              Math.round((new Date().valueOf() - startDate.valueOf()) / 1000)
+            ), //   convert elapsed count to seconds
+            tap((elapsed) => {
+              if (elapsed >= timeout) {
+                this.timeout$.next(true);
+              }
+            })
           )
-        ));
+        )
+      );
     });
   }
 

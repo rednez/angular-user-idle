@@ -6,7 +6,7 @@ import { UserIdleService } from 'angular-user-idle';
 @Component({
   selector: 'app-timer',
   templateUrl: './timer.component.html',
-  styleUrls: ['./timer.component.css']
+  styleUrls: ['./timer.component.css'],
 })
 export class TimerComponent implements OnInit {
   @Output() changeIdleValues = new EventEmitter();
@@ -23,8 +23,7 @@ export class TimerComponent implements OnInit {
   private timeoutSubscription: Subscription;
   private pingSubscription: Subscription;
 
-  constructor(private userIdle: UserIdleService) {
-  }
+  constructor(private userIdle: UserIdleService) {}
 
   ngOnInit() {
     this.idle = this.userIdle.getConfigValue().idle / 1000;
@@ -33,7 +32,7 @@ export class TimerComponent implements OnInit {
     this.changeIdleValues.emit({
       idle: this.idle,
       timeout: this.timeout,
-      ping: this.ping
+      ping: this.ping,
     });
   }
 
@@ -43,23 +42,26 @@ export class TimerComponent implements OnInit {
     this.userIdle.setConfigValues({
       idle: this.idle,
       timeout: this.timeout,
-      ping: this.ping
+      ping: this.ping,
     });
 
     // Start watching for user inactivity.
     this.userIdle.startWatching();
 
     // Start watching when user idle is starting.
-    this.timerStartSubscription = this.userIdle.onTimerStart()
-      .pipe(tap(() => this.isTimer = true))
-      .subscribe(count => this.timerCount = count);
+    this.timerStartSubscription = this.userIdle
+      .onTimerStart()
+      .pipe(tap(() => (this.isTimer = true)))
+      .subscribe((count) => (this.timerCount = count));
 
     // Start watch when time is up.
-    this.timeoutSubscription = this.userIdle.onTimeout()
-      .subscribe(() => this.timeIsUp = true);
+    this.timeoutSubscription = this.userIdle
+      .onTimeout()
+      .subscribe(() => (this.timeIsUp = true));
 
-    this.pingSubscription = this.userIdle.ping$
-      .subscribe(value => this.lastPing = `#${value} at ${new Date().toString()}`);
+    this.pingSubscription = this.userIdle.ping$.subscribe(
+      (value) => (this.lastPing = `#${value} at ${new Date().toString()}`)
+    );
   }
 
   onStopWatching() {
@@ -85,14 +87,14 @@ export class TimerComponent implements OnInit {
   }
 
   onIdleKeyup() {
-    this.changeIdleValues.emit({idle: this.idle});
+    this.changeIdleValues.emit({ idle: this.idle });
   }
 
   onTimeoutKeyup() {
-    this.changeIdleValues.emit({timeout: this.timeout});
+    this.changeIdleValues.emit({ timeout: this.timeout });
   }
 
   onPingKeyup() {
-    this.changeIdleValues.emit({ping: this.ping});
+    this.changeIdleValues.emit({ ping: this.ping });
   }
 }

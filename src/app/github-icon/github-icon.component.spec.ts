@@ -6,12 +6,13 @@ describe('GithubIconComponent', () => {
   let component: GithubIconComponent;
   let fixture: ComponentFixture<GithubIconComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ GithubIconComponent ]
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [GithubIconComponent],
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(GithubIconComponent);

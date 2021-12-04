@@ -6,12 +6,13 @@ describe('ApiInfoComponent', () => {
   let component: ApiInfoComponent;
   let fixture: ComponentFixture<ApiInfoComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ ApiInfoComponent ]
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ApiInfoComponent],
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ApiInfoComponent);
