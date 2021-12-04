@@ -1,6 +1,9 @@
 # angular-user-idle
 
-Service for Angular 6+ to detect and control of user's idle.
+Service for Angular 12+ to detect and control of user's idle.
+
+Forked from https://www.npmjs.com/package/angular-user-idle
+Credit: Vasyl Efimenko
 
 [![npm version](https://badge.fury.io/js/angular-user-idle.svg)](https://badge.fury.io/js/angular-user-idle)
 
