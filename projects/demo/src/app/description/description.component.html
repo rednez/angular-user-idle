@@ -1,0 +1,37 @@
+<section class="description mat-typography">
+  <h1>Logic</h1>
+  <ul>
+    <li>
+      Library are waiting for a user's inactive for a {{ idle / 60 }} minutes
+      ({{ idle }} seconds).
+    </li>
+    <li>
+      If inactive are detected then <code>onTimerStart()</code> is fired and
+      returning a countdown for a {{ timeout / 60 }} minutes ({{
+        timeout
+      }}
+      seconds).
+    </li>
+    <li>
+      If user did not stop the timer by <code>stopTimer()</code> then time is up
+      after {{ timeout / 60 }} minutes ({{ timeout }} seconds) and onTimeout()
+      is fire.
+    </li>
+  </ul>
+  <h1>About ping</h1>
+  <p>
+    Please note that ping is used if you want to perform some action
+    periodically every n-minutes in lifecycle of timer (from start timer to
+    timeout).
+  </p>
+  <p>
+    For example, if you want to make a request to refresh token every
+    {{ ping / 60 }} minutes ({{ ping }} seconds) you set ping to {{ ping }} and
+    subscribe to ping's observable like this:
+    <code>this.idle.ping$.subscribe(() => console.log("PING"))</code>
+  </p>
+  <p>
+    If you don't use a ping just set ping to any value (not null) and just
+    ignore it.
+  </p>
+</section>
