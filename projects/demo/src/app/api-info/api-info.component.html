@@ -1,0 +1,36 @@
+<section class="api-info mat-typography">
+  <h1>API</h1>
+
+  <div class="code">startWatching(): void</div>
+  <div class="text">Start user idle service and configure it.</div>
+
+  <div class="code">onTimerStart(): Observable&lt;number&gt;</div>
+  <div class="text">
+    Fired when timer is starting and return observable (stream) of timer's
+    count.
+  </div>
+
+  <div class="code">onTimeout(): Observable&lt;boolean&gt;</div>
+  <div class="text">
+    Fired when time is out and id user did not stop the timer.
+  </div>
+
+  <div class="code">stopTimer()</div>
+  <div class="text">Stop timer.</div>
+
+  <div class="code">resetTimer()</div>
+  <div class="text">Reset timer after onTimeout() has been fired.</div>
+
+  <div class="code">stopWatching()</div>
+  <div class="text">Stop user idle service.</div>
+
+  <div class="code">setConfigValues(&#123;idle, timeout, ping&#125;)</div>
+  <div class="text">Set config values after module was initialized.</div>
+
+  <div class="code">
+    setCustomActivityEvents(customEvents: Observable&lt;any&gt;): void
+  </div>
+  <div class="text">
+    Set custom activity events after module was initialized.
+  </div>
+</section>

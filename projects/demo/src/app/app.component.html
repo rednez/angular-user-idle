@@ -1,0 +1,8 @@
+<div class="container">
+  <app-header></app-header>
+  <app-timer (changeIdleValues)="onChangeIdleValue($event)"></app-timer>
+  <app-description [idle]="idle!" [timeout]="timeout!" [ping]="ping!">
+  </app-description>
+  <app-api-info></app-api-info>
+  <app-footer [version]="'3.0.0'" [year]="'2022'"></app-footer>
+</div>

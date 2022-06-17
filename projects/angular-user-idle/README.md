@@ -1,19 +1,17 @@
 # angular-user-idle
 
-Service for Angular 6+ to detect and control of user's idle.
+Service for Angular 13+ to detect and control of user's idle.
+
+[![npm version](https://badge.fury.io/js/angular-user-idle.svg)](https://badge.fury.io/js/angular-user-idle)
 
 ## Important
-This library was written for needs of my corporate project and this library compiles and works (Angular 6) very well and as I expected.
-Unfortunately, I don't have necessary time to maintenance my library as fast as you can expected.
-I have a plan to review my code to try to fix a bugs that was reported by other users but I don't know when I do it.
-Thank for your understanding.
+The library was written for my personal needs. So I distribute it "*as is*" without advanced supporting and change requesting.
+If you like the library just use it if not then you're free to fork the repo and make what are you want.
 
-**To use this library in Angular 5.x use angular-user-idle ver. 1.1.0 (_depreacated and don't supported!_)**
-
-#### Demo
+### Demo
 See [Demo app](https://rednez.github.io/angular-user-idle)
 
-### Installation
+## Installation
 
 `npm install angular-user-idle`
 
@@ -91,10 +89,10 @@ export class LoginComponent implements OnInit {
 ```
 
 ##### About _ping_
-Please note that ping is used if you want to perform some action periodically every _n_-minutes in lifecycle of timer 
-(from start timer to timeout). 
+Please note that ping is used if you want to perform some action periodically every _n_-minutes in lifecycle of timer
+(from start timer to timeout).
 
-For example, if you want to make a request to refresh token every 2 minutes you set ping to 120 and subscribe to ping's 
+For example, if you want to make a request to refresh token every 2 minutes you set ping to 120 and subscribe to ping's
 observable like this:
 ```typescript
 this.idle.ping$.subscribe(() => console.log("PING"));
@@ -112,11 +110,11 @@ Start user idle service and configure it.
 
 `onTimerStart(): Observable<number>`
 
-Fired when timer is starting and return observable (stream) of timer's count. 
+Fired when timer is starting and return observable (stream) of timer's count.
 
 `onTimeout(): Observable<boolean>;`
 
-Fired when time is out and id user did not stop the timer. 
+Fired when time is out and id user did not stop the timer.
 
 `stopTimer()`
 

@@ -1,3 +1,6 @@
+## 3.0.0
+- Migrate to Angular 13
+
 ## 2.2.7
 - Fixed #111 (regression issue)
 
