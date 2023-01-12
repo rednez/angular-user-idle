@@ -1,4 +1,7 @@
-## 3.0.0
+## 3.0.1
+- Add support for Angular 14.x
+- 
+- ## 3.0.0
 - Migrate to Angular 13
 
 ## 2.2.7
