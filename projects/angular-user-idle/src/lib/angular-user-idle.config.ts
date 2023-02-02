@@ -1,3 +1,5 @@
+import { EnvironmentProviders, makeEnvironmentProviders } from "@angular/core";
+
 export class UserIdleConfig {
   /**
    * Idle value in seconds.
@@ -16,4 +18,10 @@ export class UserIdleConfig {
    * idle buffer timer count user's activity actions, in seconds.
    */
   idleSensitivity?: number;
+}
+
+export function provideUserIdleConfig(config: UserIdleConfig): EnvironmentProviders {
+  return makeEnvironmentProviders([
+    { provide: UserIdleConfig, useValue: config },
+  ])
 }

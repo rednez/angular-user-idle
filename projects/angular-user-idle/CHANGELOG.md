@@ -1,6 +1,12 @@
+## 4.0.0
+
+- Migrate to Angular 15
+- Add support for Angular 15.x
+- Create provideUserIdleConfig.
+
 ## 3.0.1
 - Add support for Angular 14.x
-- 
+-
 - ## 3.0.0
 - Migrate to Angular 13
 
@@ -57,7 +63,7 @@
 **BREAKING CHANGES**: To use this library you need to upgrade your dependencies to Angular 6 and RxJS 6.
 
 ## 1.1.0
-- Include ts-sources in _dist_ to fix crashing on AOT (close #2, #3). 
+- Include ts-sources in _dist_ to fix crashing on AOT (close #2, #3).
 Thanks to [costaivo](https://github.com/costaivo).
 - Update dependency of Angular to 5.x, RxJS to 5.5.8.
 
