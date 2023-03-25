@@ -1,7 +1,7 @@
 {
   "name": "angular-user-idle",
   "version": "4.0.0",
-  "description": "User's idle service for Angular 13+",
+  "description": "User's idle service for Angular 15+",
   "author": "Vasyl Yefimenko <rednez@gmail.com>",
   "license": "MIT",
   "repository": {
