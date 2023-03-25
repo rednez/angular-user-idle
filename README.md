@@ -1,6 +1,8 @@
+[![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner-direct-single.svg)](https://stand-with-ukraine.pp.ua)
+
 # angular-user-idle
 
-Service for Angular 13+ to detect and control of user's idle.
+Service for Angular 15+ to detect and control of user's idle (for previous versions use v3.0.x).
 
 [![npm version](https://badge.fury.io/js/angular-user-idle.svg)](https://badge.fury.io/js/angular-user-idle)
 
@@ -19,21 +21,18 @@ In app.module.ts:
 ```typescript
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { UserIdleModule } from 'angular-user-idle';
-
+import { provideUserIdleConfig } from 'angular-user-idle';
 import { AppComponent } from './app.component';
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    
+  imports: [BrowserModule],
+  declarations: [AppComponent],
+  providers: [
     // Optionally you can set time for `idle`, `timeout` and `ping` in seconds.
     // Default values: `idle` is 600 (10 minutes), `timeout` is 300 (5 minutes) 
     // and `ping` is 120 (2 minutes).
-    UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 120})
+    provideUserIdleConfig({ idle: 600, timeout: 300, ping: 120 })
   ],
-  declarations: [AppComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
@@ -49,13 +48,9 @@ import { Component, OnInit } from '@angular/core';
 import { UserIdleService } from 'angular-user-idle';
 
 @Component({
-  templateUrl: './login.component.jade'
+  templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
-
-  readonly googlePlayLink: string;
-  readonly appStoreLink: string;
-
   constructor(private userIdle: UserIdleService) {
   }
 

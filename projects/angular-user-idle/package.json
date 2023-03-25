@@ -1,6 +1,6 @@
 {
   "name": "angular-user-idle",
-  "version": "3.0.1",
+  "version": "4.0.0",
   "description": "User's idle service for Angular 13+",
   "author": "Vasyl Yefimenko <rednez@gmail.com>",
   "license": "MIT",
@@ -9,8 +9,8 @@
     "url": "https://github.com/rednez/angular-user-idle.git"
   },
   "peerDependencies": {
-    "@angular/common": "^13.3.0 || ^14.0.0",
-    "@angular/core": "^13.3.0 || ^14.0.0",
+    "@angular/common": ">=13.3.0 || ^14 || >16.0.0",
+    "@angular/core": ">=13.3.0 || ^14 || >16.0.0",
     "rxjs": "^7.5.0"
   },
   "dependencies": {
