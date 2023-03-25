@@ -1,11 +1,6 @@
 .timer {
-  max-width: 400px;
+  max-width: 460px;
   margin: 50px auto 0 auto;
-}
-
-.inputCtrl {
-  margin: 0 16px;
-  width: 25%;
 }
 
 .status {
@@ -19,4 +14,14 @@
 
 .timeIsUp {
   color: #e93d2c;
+}
+
+.mat-card-content {
+  display: flex;
+  column-gap: 12px;
+}
+
+.buttons-group {
+  display: flex;
+  column-gap: 12px;
 }

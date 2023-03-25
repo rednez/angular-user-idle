@@ -3,8 +3,8 @@
     <mat-card-title>Timer</mat-card-title>
   </mat-card-header>
 
-  <mat-card-content>
-    <mat-form-field class="inputCtrl">
+  <mat-card-content class="mat-card-content">
+    <mat-form-field>
       <input
         type="number"
         matInput
@@ -14,7 +14,7 @@
         (keyup)="onIdleKeyup()"
       />
     </mat-form-field>
-    <mat-form-field class="inputCtrl">
+    <mat-form-field>
       <input
         type="number"
         matInput
@@ -24,7 +24,7 @@
         (keyup)="onTimeoutKeyup()"
       />
     </mat-form-field>
-    <mat-form-field class="inputCtrl">
+    <mat-form-field>
       <input
         type="number"
         matInput
@@ -39,9 +39,9 @@
   <div *ngIf="lastPing" class="status ping">ping {{ lastPing }}</div>
   <div *ngIf="timeIsUp" class="status timeIsUp">Time is up</div>
 
-  <mat-card-actions>
+  <mat-card-actions class="buttons-group">
     <button
-      mat-button
+      mat-flat-button
       color="primary"
       [disabled]="isWatching"
       (click)="onStartWatching()"
@@ -49,7 +49,7 @@
       Start watching
     </button>
     <button
-      mat-button
+      mat-stroked-button
       color="primary"
       [disabled]="!isWatching"
       (click)="onStopWatching()"
@@ -60,7 +60,7 @@
     <button
       *ngIf="isTimer && !timeIsUp"
       mat-button
-      color="primary"
+      color="accent"
       (click)="onStopTimer()"
       matBadge="{{ timerCount }}"
       matBadgePosition="after"

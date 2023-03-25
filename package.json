@@ -2,10 +2,11 @@
   "name": "angular-user-idle-repo",
   "description": "angular-user-idle repository",
   "version": "4.0.0",
+  "author": "Vasyl Yefimenko <rednez@gmail.com>",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build demo",
     "build:lib": "ng build angular-user-idle",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -41,5 +42,6 @@
     "ng-packagr": "^15.1.1",
     "prettier": "^2.7.1",
     "typescript": "~4.9.5"
-  }
+  },
+  "defaultProject": "demo"
 }
