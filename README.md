@@ -103,9 +103,9 @@ If you don't use a ping just set ping to any value (not null) and just ignore it
 
 Start user idle service and configure it.
 
-`onTimerStart(): Observable<number>`
+`onTimerStart(): Observable<number|null>`
 
-Fired when timer is starting and return observable (stream) of timer's count. 
+Fired when timer is starting and return observable (stream) of timer's count or null if comes from a stopWatching. 
 
 `onTimeout(): Observable<boolean>;`
 
